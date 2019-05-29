@@ -1,0 +1,218 @@
+body {
+  font-family: Consolas, 'Roboto Mono', Monaco, Courier, monospace;
+  font-size: 11px;
+  box-sizing: border-box;
+}
+
+clear {
+  display: block;
+  content: ' ';
+  clear: both;
+  font-size: 0;
+  height: 0;
+
+}
+
+divider {
+  display: block;
+  margin: 4px 0;
+  border-top: 1px solid grey;
+  width: 100%;
+}
+
+.white {
+  filter: invert(100%);
+}
+
+.icon {
+  line-height: 1em;
+  height: 1em;
+  vertical-align: bottom;
+}
+
+#mapContainer {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+#mapTable {
+  font-size: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  user-select: none;
+}
+
+#mapTable tr {
+  font-size: 0;
+}
+
+#mapTable td {
+  border: 1px solid grey;
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  overflow: visible;
+  color: white;
+  box-sizing: border-box;
+  cursor: crosshair;
+  position: relative;
+  transition: none;
+}
+
+#mapTable td:hover, #mapTable td.highlight {
+  box-shadow: inset 0px 0px 6px 0px rgba(255, 255, 255, 0.4);
+}
+
+#mapTable td.highlight {
+  border: 3px solid white;
+}
+
+stripe {
+  display: block;
+  position: absolute;
+  background: repeating-linear-gradient(53deg, #ffffff00, #ffffff00 15px, #379e4e44 15px, #379e4e44 21px);
+  border: 2px solid transparent;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 50;
+}
+
+stripe.removeClick {
+  pointer-events: all;
+  cursor: no-drop;
+}
+
+arrow {
+  position: absolute;
+  display: block;
+  min-height: 10px;
+  background: blue;
+  pointer-events: none;
+  z-index: 50;
+  transform-origin: top left;
+  background-repeat: repeat-x;
+  background-size: contain;
+  animation: slidingBackground 40s linear infinite;
+}
+
+@keyframes slidingBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+arrow.move {
+  background-image: url('../images/arrow_move.png');
+  z-index: 57;
+  border-radius: 24%;
+}
+
+arrow.r1 {
+  background-image: url('../images/arrow_army.png');
+  z-index: 56;
+}
+
+arrow.r2 {
+  background-image: url('../images/arrow_division.png');
+  min-height: 8px;
+  z-index: 55;
+}
+
+arrow.r3 {
+  background-image: url('../images/arrow_regiment.png');
+  min-height: 6px;
+  z-index: 54;
+}
+
+arrow.r4 {
+  background-image: url('../images/arrow_company.png');
+  min-height: 4px;
+  z-index: 53;
+}
+
+unit {
+  display: block;
+  position: absolute;
+  top: calc((100px - 40px) / 2);
+  left: calc((100px - 40px) / 2);
+  z-index: 100;
+
+  background: black;
+  border-radius: 10px;
+  border: 1px solid white;
+
+  width: 50px;
+  height: 50px;
+
+  color: white;
+}
+
+unit b {
+  font-size: 12px;
+  margin-left: 5px;
+  background: white;
+  color: black;
+  padding: 4px 2px;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-top: 6px;
+  display: block;
+  width: 34px;
+  text-align: center;
+}
+
+unit span {
+  font-size: 12px;
+  color: white;
+  margin-top: 3px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+#mapTable td div.unit-container {
+  transition: all .3s ease;
+  opacity: 0.3;
+}
+
+#mapTable td:hover div.unit-container, #mapTable td.highlight div.unit-container, div.unit-container:hover {
+  opacity: 1 !important;
+}
+
+position {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 10px;
+  color: grey;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#mapTable td.interval position {
+  opacity: 1;
+}
+
+#mapTable td:hover position, #mapTable td.highlight position {
+  color: white;
+  opacity: 1;
+}
+
+.city {
+  background-image: url('../images/city.png');
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: 5px 5px;
+}
+
+.city.large {
+  background-image: url('../images/city_large.png');
+}
+.city.small {
+  background-image: url('../images/city_small.png');
+}
