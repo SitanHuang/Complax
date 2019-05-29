@@ -142,5 +142,5 @@ function _ai_orderMove(unit) {
   if (city) unit.order = city;
   else if (plain) unit.order = plain;
   else if (neighbor) unit.order = neighbor;
-  else unit.most = most;
+  else unit.order = most;
 }

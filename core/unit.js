@@ -45,7 +45,7 @@ class Unit {
   }
 
   get plan() { return this._plan; }
-  set plan(p) { this._plan = p; this.planning = (this.planning - 0.3).min(7); }
+  set plan(p) { this._plan = p; this.planning = (this.planning - 0.3).min(.7); }
 
   add() {
     UNITS[this.id] = this;

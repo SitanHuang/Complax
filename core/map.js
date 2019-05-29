@@ -195,12 +195,14 @@ function generateWorld() {
     // ======= army =======
     let army = new Unit(playerCities[playerNum].sample(), playerNum, RANK_ARMY,
       -1, MAP_SOLDIER_PER_RANK()).add();
+    _playerSquad.push(army);
     // ======= divisions =======
     let dnum = MAP_CHILDREN_PER_RANK();
     for (let di = 0; di < dnum; di++) {
       let division = new Unit(pt(rowFunc(), colFunc()), playerNum,
         RANK_DIVISION, army.id, MAP_SOLDIER_PER_RANK()).add();
       army.children.push(division.id);
+      _playerSquad.push(division);
 
       // ======= regiments =======
       let rnum = MAP_CHILDREN_PER_RANK();
@@ -208,6 +210,7 @@ function generateWorld() {
         let regiment = new Unit(division.loc, playerNum, RANK_REGIMENT,
           division.id, MAP_SOLDIER_PER_RANK()).add();
         division.children.push(regiment.id);
+        _playerSquad.push(regiment);
 
         // ======= companies =======
         let cnum = MAP_CHILDREN_PER_RANK();
@@ -215,7 +218,7 @@ function generateWorld() {
           let company = new Unit(pt(rowFunc(), colFunc()), playerNum,
             RANK_COMPANY, regiment.id, MAP_SOLDIER_PER_RANK()).add();
           regiment.children.push(company.id)
-          _playerSquad.push(company);
+          if (Math.random() < 0.7) _playerSquad.push(company);
 
 
           // ======= squads =======
@@ -224,6 +227,7 @@ function generateWorld() {
             let squad = new Unit(company.loc, playerNum, RANK_SQUAD, company.id,
               MAP_SOLDIER_PER_SQUAD()).add();
             company.children.push(squad.id);
+            if (Math.random() < 0.9) _playerSquad.push(squad);
           }
         }
       }

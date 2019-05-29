@@ -27,8 +27,8 @@ function ai_handleRecruits(unit) {
         unit.recruits -= n;
       });
     }
-    if (unit.recruits > 0)
-      unit.recruit(unit.recruits);
+    if (unit.recruits > 0 && unit.soldiers < minSoldiers)
+      unit.recruit(unit.recruits.max(minSoldiers));
     unit.expand();
     break;
   case ORDER_MIN:

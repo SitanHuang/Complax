@@ -561,6 +561,7 @@ function updateMenuDialog() {
     Turn: ${turnNumber}<br>
     <button onclick="dialogUnit(${cu.id})">${cu.rankTitle} ${cu.id}</button>
     <button onclick="nextUnit()">Next</button>
+    <button onclick="think(Unit.fetch(currentUnit)); updateMenuDialog(); setTimeout(nextUnit, 0)">AI Think</button>
     <button onclick="dialogCities(true)">Cities</button>
     <button onclick="dialogPlayers(true)">Players</button><br>
     <divider><br>
