@@ -179,7 +179,7 @@ function generateWorld() {
       if (cities.length < 20 && Math.random() < ((1 + (25 - cities.length)) /
           (MAP_WIDTH *
             MAP_HEIGHT * 1.1))) {
-        p.city = (Math.random() * 200).round().min(1).max(200);
+        p.city = (Math.random() * 300).round().min(1).max(200);
         PLAYERS[p.owner].production += p.city;
         cities.push(pt(row, col));
         playerCities[p.owner].push(pt(row, col))
