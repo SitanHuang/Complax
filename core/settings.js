@@ -2,7 +2,7 @@
 // map generation
 MAP_HEIGHT = 15;
 MAP_WIDTH = 30;
-MAP_CHILDREN_PER_RANK = inclusiveRange(2, 4);
+MAP_CHILDREN_PER_RANK = inclusiveRange(3, 5);
 MAP_SOLDIER_PER_SQUAD = inclusiveRange(20, 30);
 MAP_SOLDIER_PER_RANK = inclusiveRange(2, 10);
 // ranks (also in unit.js)
