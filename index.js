@@ -38,6 +38,7 @@ function nextTurn(init) {
         // u._childrenRequestRecruits = 0;
         delete u._recruited;
         delete u._expanded;
+        delete u._trained;
       });
     });
   });
@@ -92,7 +93,10 @@ function nextUnit() {
   if (unit.ai) {
     think(unit);
     updateMenuDialog();
-    setTimeout(nextUnit, 0)
+    if (currentUnit % 20 == 0)
+      setTimeout(nextUnit, 0)
+    else
+      nextUnit();
   } else {
     DIALOGS_DELETE_LIST.forEach((x) => {
       x.remove();
