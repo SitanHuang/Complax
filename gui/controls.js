@@ -80,12 +80,15 @@ function _generateUnitProvinceRow(unit, clazz) {
 function _generateSelfActionButtons(unit) {
   let html = `<p>
   <button onclick="requestRecruitsDialog(Unit.fetch(${unit.id}))">Request recruits</button>
-  <button onclick="orderMoveDialog(Unit.fetch(${unit.id}))">Order move</button>
   `;
+  if (!unit._trained)
+    html += `<button onclick="orderMoveDialog(Unit.fetch(${unit.id}))">Order move</button>`;
   if (!unit._recruited)
     html += `<button onclick="deployRecruitsDialog(Unit.fetch(${unit.id}))">Deploy</button>`;
   if (!unit._expanded)
     html += `<button onclick="expandUnitDialog(Unit.fetch(${unit.id}))">Expand</button>`;
+  if (!unit._trained)
+    html += `<button onclick="trainUnitDialog(Unit.fetch(${unit.id}))">Train</button>`;
   return html + `</p>
   <p class="orderMoveTip" style="display: none">Select a province</p>
   `;
@@ -191,7 +194,7 @@ function orderMoveDialog(unit) {
     } catch (e) { }
   });
   removeAllHighlight();
-  highlightProvince(unit.loc);
+  // highlightProvince(unit.loc);
   traverseMap(col => {
     let p = pt(col.row, col.col);
     let td = $(p.td);
@@ -207,6 +210,10 @@ function orderMoveDialog(unit) {
 
 function expandUnitDialog(unit) {
   if (unit.expand()) dialogUnit(unit.id);
+}
+
+function trainUnitDialog(unit) {
+  if (unit.train()) dialogUnit(unit.id);
 }
 
 function giveRecruitsDialog(unit) {

@@ -173,6 +173,8 @@ class Unit {
   }
 
   processMove() {
+    if (this._trained) this.order = null;
+    
     // TODO: terrain & distance
     this.hp = (this.hp + 0.15).max(1);
 
@@ -285,6 +287,8 @@ class Unit {
   }
 
   _moveTo(target) {
+    if (this._trained) return;
+    
     if (target.eq(this.loc)) return;
     if (this.removed) return;
 
@@ -307,6 +311,18 @@ class Unit {
 
   addAverageExperience(d) {
     this.averageExperience = (this.averageExperience + d).max(4).min(0.5);
+  }
+  
+  train() {
+    if (this._trained) return false;
+    if (!this.supplied) return false;
+
+    this._trained = true;
+    
+    this.order = null;
+    this.addAverageExperience(0.1);
+    
+    return true;
   }
 
   // ============== actions ===============

@@ -107,6 +107,16 @@ function _ai_squad_move(unit) {
 }
 
 function _ai_orderMove(unit) {
+  unit.order = null;
+  
+  if (unit.orderPriority == ORDER_MIN && unit.averageExperience < 1.5) {
+    unit.train();
+    return;
+  } else if (unit.orderPriority == ORDER_MED && unit.averageExperience < 1) {
+    unit.train();
+    return;
+  }
+    
   if (unit.rank == RANK_SQUAD || (unit.children.length == 0 && Math.random() > 0.8) || Math.random() > 0.95) {
     _ai_squad_move(unit);
     return;
