@@ -13,6 +13,8 @@ function ai_handleRecruits(unit) {
     unit.recruit(unit.recruits);
     return;
   }
+  
+  if (childUnits.length <= 3) unit.requestRecruits = unit.expandCost;
 
   let available;
   switch (unit.orderPriority) {
@@ -33,7 +35,7 @@ function ai_handleRecruits(unit) {
     break;
   case ORDER_MIN:
     unit.expand();
-    if (unit.recruits > 0 && unit.soldiers < minSoldiers && childSum >= 3)
+    if (unit.recruits > 0 && unit.soldiers < minSoldiers && childUnits.length >= 3)
       unit.recruit(unit.recruits.max(minSoldiers));
     if (childSum > 0) {
       available = (unit.recruits * 0.8).floor();
@@ -59,7 +61,7 @@ function ai_handleRecruits(unit) {
       });
     }
     if (Math.random() > 0.7 || childSum < 3) unit.expand();
-    if (unit.recruits > 0 && unit.soldiers < minSoldiers && childSum >= 3)
+    if (unit.recruits > 0 && unit.soldiers < minSoldiers && childUnits.length >= 3)
       unit.recruit((unit.recruits / 2).max(minSoldiers));
   }
 }
