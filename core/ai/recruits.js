@@ -58,7 +58,7 @@ function ai_handleRecruits(unit) {
         unit.recruits -= n;
       });
     }
-    unit.expand();
+    if (Math.random() > 0.7 || childSum < 3) unit.expand();
     if (unit.recruits > 0 && unit.soldiers < minSoldiers)
       unit.recruit((unit.recruits / 2).max(minSoldiers));
   }
