@@ -14,7 +14,7 @@ function ai_handleRecruits(unit) {
     return;
   }
   
-  if (childUnits.length <= 3) unit.requestRecruits = unit.expandCost;
+  if (childUnits.length <= 3) unit.requestRecruits += unit.expandCost;
 
   let available;
   switch (unit.orderPriority) {
