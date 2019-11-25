@@ -59,7 +59,7 @@ function ai_handleRecruits(unit) {
       });
     }
     if (Math.random() > 0.7 || childSum < 3) unit.expand();
-    if (unit.recruits > 0 && unit.soldiers < minSoldiers)
+    if (unit.recruits > 0 && unit.soldiers < minSoldiers && childSum < 3)
       unit.recruit((unit.recruits / 2).max(minSoldiers));
   }
 }
