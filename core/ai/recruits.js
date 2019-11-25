@@ -49,7 +49,7 @@ function ai_handleRecruits(unit) {
   case ORDER_MED:
   default:
     if (childSum > 0) {
-      available = (unit.recruits * (0.9 + Math.random() * 0.05)).floor();
+      available = (unit.recruits * (0.97 + Math.random() * 0.02)).floor();
       childUnits.forEach(x => {
         if (!x.supplied) return;
         let n = (x.requestRecruits / childSum * available).floor().max(unit
