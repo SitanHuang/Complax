@@ -126,7 +126,7 @@ class Unit {
   }
 
   get expandCost() {
-    return (this.expandable ? (50 / this.rank) + this.children.length * 10 : IMPOSSIBLE_EXPAND_COST).floor();
+    return (this.expandable ? (10 / this.rank) + this.children.length * 10 : IMPOSSIBLE_EXPAND_COST).floor();
   }
 
   get rankTitle() {
