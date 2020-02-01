@@ -5,8 +5,8 @@ function ai_givePlan(unit) {
   }
   if (unit.rank == RANK_ARMY) {
     unit.plan = [];
-    if (turnNumber % unit._attackCycle == 1) {
-      console.warn('Attack cycle!');
+    if (turnNumber % unit._attackCycle <= 1) {
+      console.warn(owner + ': Attack cycle!');
     }
     traverseMap((pro) => {
       if (pro.owner != unit.owner) {
