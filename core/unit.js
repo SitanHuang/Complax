@@ -3,6 +3,7 @@ var unitIDIncrement = 0;
 class Unit {
   constructor (loc, owner, rank, parent, soldiers) {
     this.id = unitIDIncrement++;
+    this._attackCycle = (Math.random() * 15 + 5).floor();
 
     this.loc = loc.eq ? loc : null;
 
@@ -58,7 +59,7 @@ class Unit {
   }
 
   get supplied() {
-    return this.loc.province._defendable;
+    return this.loc.province.city > 0 || this.loc.province._defendable;
   }
 
   get parentUnit() {

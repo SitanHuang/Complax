@@ -22,7 +22,7 @@ function calcHQMinRecruits(unit) {
   if (unit.rank == RANK_SQUAD)
     return 6;
   else
-    return (unit.averageExperience * unit.averageStrength + 25 / unit.rank).min(Math.random().round()).floor();
+    return (unit.averageExperience * unit.averageStrength + 12 / unit.rank).min(Math.random().round()).floor();
 }
 
 function calcRequestRecruitsMaxIncludeChild(unit) {

@@ -108,6 +108,8 @@ class Province {
       (bottom && bottom.owner == this.owner && bottom._adjacentDiff <= 2) ||
       (left && left.owner == this.owner && left._adjacentDiff <= 2) ||
       (right && right.owner == this.owner && right._adjacentDiff <= 2);
+    // if city, not defendable but supplied
+    // if (this.city > 0) this._defendable = true;
 
     // if block near any enemy block, the attackable
     this._attackable = (top && top.owner != this.owner && top._adjacentDiff <=

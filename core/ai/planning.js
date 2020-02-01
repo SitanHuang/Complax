@@ -5,11 +5,23 @@ function ai_givePlan(unit) {
   }
   if (unit.rank == RANK_ARMY) {
     unit.plan = [];
+    if (turnNumber % unit._attackCycle == 1) {
+      console.warn('Attack cycle!');
+    }
     traverseMap((pro) => {
       if (pro.owner != unit.owner) {
-        if (pro._attackable) unit.plan.push(pro.loc);
-      } else if (pro._defendable) {
-        if (pro._attackable || pro.city) unit.plan.push(pro.loc);
+        if (pro._attackable) {
+          if (turnNumber % unit._attackCycle == 10) unit.plan.push(pro.loc);
+          if (pro.units.length == 0 && (pro._adjacentDiff > 1)) unit.plan.push(pro.loc);
+          if (!pro._defendable) unit.plan.push(pro.loc);
+          if (pro.city > 0) unit.plan.push(pro.loc);
+          if (Math.random() < 0.1) unit.plan.push(pro.loc);
+        }
+      } else if (pro._defendable || pro.city) {
+        if (pro._attackable) { unit.plan.push(pro.loc); unit.plan.push(pro.loc); } 
+        if (pro.city) {
+          unit.plan.push(pro.loc);
+        }
       }
     });
   }
@@ -42,16 +54,16 @@ function _ai_givePriority(unit, child) {
         child.orderPriority = ORDER_MED;
       break;
     case ORDER_MIN:
-      if (child._averageHP >= 0.9 && (child.rank == RANK_SQUAD ? child.soldiers > 40 : child.soldiers >= calcHQMinRecruits(child)))
+      if (child._averageHP >= 0.9 && (child.rank == RANK_SQUAD ? child.soldiers > 30 : child.soldiers >= calcHQMinRecruits(child)))
         child.orderPriority = ORDER_MED;
       else
         child.orderPriority = ORDER_MIN;
       break;
     default:
     case ORDER_MED:
-      if (child._averageHP >= 0.8 && (child.rank == RANK_SQUAD ? child.soldiers > 40 : true))
+      if (child._averageHP >= 0.8 && (child.rank == RANK_SQUAD ? child.soldiers > 25 : true))
         child.orderPriority = ORDER_MAX;
-      else if (child._averageHP >= 0.6 && (child.rank == RANK_SQUAD ? child.soldiers > 25 : true))
+      else if (child._averageHP >= 0.6 && (child.rank == RANK_SQUAD ? child.soldiers > 15 : true))
         child.orderPriority = ORDER_MED;
       else
         child.orderPriority = ORDER_MIN;
@@ -76,9 +88,9 @@ function _ai_squad_move(unit) {
       break;
     default:
     case ORDER_MED:
-      if (unit._averageHP >= 0.8 && (unit.rank == RANK_SQUAD ? unit.soldiers > 40 : true))
+      if (unit._averageHP >= 0.6 && (unit.rank == RANK_SQUAD ? unit.soldiers > 30 : true))
         moveTo = 1;
-      else if (unit._averageHP >= 0.4 && (unit.rank == RANK_SQUAD ? unit.soldiers > 25 : true))
+      else if (unit._averageHP >= 0.35 && (unit.rank == RANK_SQUAD ? unit.soldiers > 10 : true))
         moveTo = 0;
       break;
   }
