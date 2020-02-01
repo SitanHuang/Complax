@@ -11,7 +11,7 @@ function ai_givePlan(unit) {
     traverseMap((pro) => {
       if (pro.owner != unit.owner) {
         if (pro._attackable) {
-          if (turnNumber % unit._attackCycle == 10) unit.plan.push(pro.loc);
+          if (turnNumber % unit._attackCycle <= 1) unit.plan.push(pro.loc);
           if (pro.units.length == 0 && (pro._adjacentDiff > 1)) unit.plan.push(pro.loc);
           if (!pro._defendable) unit.plan.push(pro.loc);
           if (pro.city > 0) unit.plan.push(pro.loc);
