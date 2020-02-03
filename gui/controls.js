@@ -448,10 +448,10 @@ function dialogPlayers(toggle) {
   // refresh content
 
   let [ownSum, enemySum] = calcPlayersProduction();
-//   let p1 = PLAYERS[currentPlayer];
-//   let p2 = PLAYERS[currentPlayer == 1 ? 0 : 1];
-  let p1 = PLAYERS[0];
-  let p2 = PLAYERS[1];
+  let p1 = PLAYERS[currentPlayer];
+  let p2 = PLAYERS[currentPlayer == 1 ? 0 : 1];
+//   let p1 = PLAYERS[0];
+//   let p2 = PLAYERS[1];
 
   let html = '';
 
