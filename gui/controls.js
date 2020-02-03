@@ -448,8 +448,10 @@ function dialogPlayers(toggle) {
   // refresh content
 
   let [ownSum, enemySum] = calcPlayersProduction();
-  let p1 = PLAYERS[currentPlayer];
-  let p2 = PLAYERS[currentPlayer == 1 ? 0 : 1];
+//   let p1 = PLAYERS[currentPlayer];
+//   let p2 = PLAYERS[currentPlayer == 1 ? 0 : 1];
+  let p1 = PLAYERS[0];
+  let p2 = PLAYERS[1];
 
   let html = '';
 
@@ -459,6 +461,7 @@ function dialogPlayers(toggle) {
   Total recruits: ${p1.totalRecruits}<br>
   Total soldiers: ${p1.totalSoldiers}<br>
   Total units: ${p1.totalUnits}<br>
+  Units on frontline: ${p1.unitsOnFrontLine} (${(p1.unitsOnFrontLine / p1.totalUnits * 100).round()}%)<br>
   Casualties: ${p1.casualty}<br>
   `;
   html += `<div class="city-row" style="background-color: ${p2.color};font-weight: bold;margin: 0 -3px;">
@@ -467,6 +470,7 @@ function dialogPlayers(toggle) {
   Total recruits: ${p2.totalRecruits}<br>
   Total soldiers: ${p2.totalSoldiers}<br>
   Total units: ${p2.totalUnits}<br>
+  Units on frontline: ${p2.unitsOnFrontLine} (${(p2.unitsOnFrontLine / p2.totalUnits * 100).round()}%)<br>
   Casualties: ${p2.casualty}<br>
   `;
 
