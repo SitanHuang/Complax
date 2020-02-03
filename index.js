@@ -25,7 +25,6 @@ function nextTurn(init) {
   map.forEach((rowData, row) => {
     rowData.forEach((p, col) => {
       if (init) p.calcPostAdjacentDiff();
-      if (p._adjacentDiff > 0) PLAYERS[p.owner].unitsOnFrontLine += p.units.length;
       p.units.forEach(x => {
         let u = Unit.fetch(x);
         u.calcTotalAttack();
@@ -33,6 +32,8 @@ function nextTurn(init) {
         // ======= unit logics =======
         u.processMove();
         // ===========================
+
+        if (p._adjacentDiff > 0) PLAYERS[u.owner].unitsOnFrontLine += u.soldiers;
 
         PLAYERS[u.owner].totalRecruits += u.recruits;
         PLAYERS[u.owner].totalSoldiers += u.soldiers;
