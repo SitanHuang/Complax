@@ -27,22 +27,21 @@ function ai_givePlan(unit) {
   }
 
   let lastIndex = 0;
-  let passed = false;
-  while (!passed) {
-    unit.childrenUnits.forEach(child => {
-      let perc = (child._totalAttack / unit._totalAttack).max(1).min(0);
-      let length = (perc * unit.plan.length).floor().min(1);
+  unit.childrenUnits.forEach((child, i) => {
+    let perc = (child._totalAttack / unit._totalAttack).max(1).min(0);
+    let length = (perc * unit.plan.length).round().min(1);
+    if (unit.childrenUnits.length == i + 1) {
+      length = (unit.plan.length - lastIndex + 1).min(0);
+    }
 
-      child.plan = unit.plan.slice(lastIndex, lastIndex + length);
-      _ai_givePriority(unit, child);
+    child.plan = unit.plan.slice(lastIndex, lastIndex + length);
+    _ai_givePriority(unit, child);
 
-      lastIndex += length;
-      if (lastIndex >= unit.plan.length) {
-        lastIndex = 0;
-        passed = true;
-      }
-    });
-  }
+    lastIndex += length;
+    if (lastIndex >= unit.plan.length) {
+      lastIndex = 0;
+    }
+  });
 
 }
 
