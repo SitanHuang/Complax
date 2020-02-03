@@ -6,6 +6,7 @@ function nextTurn(init) {
   turnNumber++;
 
   PLAYERS.forEach(x => {
+    x.unitsOnFrontLine = 0;
     x.totalRecruits = 0;
     x.totalSoldiers = 0;
     x.totalUnits = 0;
@@ -24,6 +25,7 @@ function nextTurn(init) {
   map.forEach((rowData, row) => {
     rowData.forEach((p, col) => {
       if (init) p.calcPostAdjacentDiff();
+      if (p._adjacentDiff > 0) PLAYERS[p.owner].unitsOnFrontLine += p.units.length;
       p.units.forEach(x => {
         let u = Unit.fetch(x);
         u.calcTotalAttack();
