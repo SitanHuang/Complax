@@ -102,11 +102,12 @@ function _ai_squad_move(unit) {
   let list = unit.plan.filter(a => {
     let x = a.province;
     return (moveTo == 1 && x.owner != unit.owner && x._attackable) ||
-      (moveTo == 0 && x.owner == unit.owner && x._defendable) ||
-      (moveTo == -1 && x.owner == unit.owner && x._defendable);
+      (moveTo >= 0 && x.owner == unit.owner && x._defendable);
   });
 
-  if (moveTo >= 0)
+  if (moveTo >= 1)
+    unit.order = list.filter(x => x.owner != unit.owner && x._attackable).sample() || list.sample();
+  else if (moveTo >= 0)
     unit.order = list.sample();
   else if (list.length) {
     let avail = [];
